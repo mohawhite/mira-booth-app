@@ -1,6 +1,6 @@
 import { useMachine } from '@xstate/react'
 import { AnimatePresence } from 'motion/react'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { fromPromise } from 'xstate'
 import { Admin } from './admin/Admin'
 import { AdminCorner } from './admin/AdminGate'
@@ -9,6 +9,7 @@ import { Stage } from './components/Stage'
 import { useLang } from './i18n'
 import { bridge, isElectron } from './lib/bridge'
 import { getConfig, useConfig } from './lib/config'
+import { say, stopVoice } from './lib/voice'
 import { boothMachine, type BoothContext, type BoothState } from './machine/boothMachine'
 import { compose } from './render/compose'
 import { Accueil } from './screens/Accueil'
@@ -64,6 +65,21 @@ function Booth() {
   useEffect(() => {
     if (state === 'attente') useLang.getState().setLang(config.system.lang)
   }, [state, config.system.lang])
+
+  // Voix guide : une phrase à l'entrée de certains écrans.
+  const previous = useRef<BoothState>(state)
+  useEffect(() => {
+    const from = previous.current
+    previous.current = state
+    if (from === state) return
+    if (state === 'attente') stopVoice()
+    else if (state === 'format' && from === 'accueil') say('accueil')
+    else if (state === 'compte' && ctx.photos.length === 0) say('regard')
+    else if (state === 'interlude') say('pose')
+    else if (state === 'revue') say('revue', 600)
+    // Laisse d'abord sonner le carillon de fin.
+    else if (state === 'merci') say(ctx.printed > 0 ? 'impression' : 'merci', 700)
+  }, [state, ctx.photos.length, ctx.printed])
 
   const reset = useCallback(() => send({ type: 'RESET' }), [send])
   const props = { ctx, send }

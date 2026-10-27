@@ -37,6 +37,8 @@ export const DEFAULT_CONFIG: BoothConfig = {
     pin: '1234',
     lang: 'fr',
     sounds: true,
+    voice: true,
+    voiceVolume: 0.9,
     galleryBaseUrl: ''
   }
 }

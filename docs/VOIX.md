@@ -78,3 +78,12 @@ npm run voix
 Dans ElevenLabs → **Text to Speech**, choisissez la voix et le modèle **Eleven Multilingual v2**,
 collez chaque texte du tableau, générez, et téléchargez le fichier sous le nom indiqué (MP3).
 Rangez-les dans `src/renderer/public/voix/fr/`.
+
+## 6. Dans la borne
+
+- La voix se déclenche seule : choix du format, première pose, entre les poses, revue, fin.
+- **Espace opérateur → Système** : activer/couper la voix, régler le volume, bouton
+  **Écouter**, et nombre de fichiers trouvés par langue (ex. « FR : 10/10 fichiers »).
+- S'il manque des fichiers, la borne reste simplement muette à ces moments-là.
+- Pour que la borne les garde après une mise à jour, enregistrez les fichiers dans le dépôt :
+  `git add src/renderer/public/voix` puis `git commit -m "Voix Victoria"` et `git push`.

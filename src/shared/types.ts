@@ -40,6 +40,8 @@ export interface BoothConfig {
     pin: string
     lang: Lang
     sounds: boolean
+    voice: boolean // voix guide (fichiers MP3 dans public/voix)
+    voiceVolume: number // 0 à 1
     galleryBaseUrl: string // vide = adresse locale automatique
   }
 }

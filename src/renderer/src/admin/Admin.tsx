@@ -3,6 +3,7 @@ import { closeCamera, listVideoDevices } from '@/camera/camera'
 import { IconMinus, IconPlus } from '@/components/Icons'
 import { bridge } from '@/lib/bridge'
 import { useConfig } from '@/lib/config'
+import { countVoiceFiles, previewVoice } from '@/lib/voice'
 import { calibrationPage } from '@/render/compose'
 import type { BoothConfig, BoothStatus, FormatId, SavedSession } from '@shared/types'
 
@@ -70,6 +71,7 @@ export function Admin({ onClose }: { onClose: () => void }) {
   const [status, setStatus] = useState<BoothStatus>()
   const [sessions, setSessions] = useState<SavedSession[]>([])
   const [devices, setDevices] = useState<MediaDeviceInfo[]>([])
+  const [voiceFiles, setVoiceFiles] = useState<Record<string, { found: number; total: number }>>({})
   const [notice, setNotice] = useState('')
   const dirty = JSON.stringify(draft) !== JSON.stringify(config)
 
@@ -83,6 +85,8 @@ export function Admin({ onClose }: { onClose: () => void }) {
   useEffect(() => {
     if (tab === 'galerie') void bridge.listSessions(config.event.id).then(setSessions)
     if (tab === 'camera') void listVideoDevices().then(setDevices).catch(() => setDevices([]))
+    if (tab === 'systeme')
+      void Promise.all([countVoiceFiles('fr'), countVoiceFiles('en')]).then(([fr, en]) => setVoiceFiles({ fr, en }))
   }, [tab, config.event.id])
 
   const patch = <K extends keyof BoothConfig>(section: K, values: Partial<BoothConfig[K]>): void =>
@@ -295,7 +299,16 @@ export function Admin({ onClose }: { onClose: () => void }) {
               <input inputMode="numeric" value={sys.pin} onChange={(e) => patch('system', { pin: e.target.value.replace(/\D/g, '').slice(0, 8) })} />
             </Field>
             <Field label="Langue par défaut"><Choice value={sys.lang} options={[['fr', 'Français'], ['en', 'English']]} onChange={(v) => patch('system', { lang: v })} /></Field>
-            <Field label="Sons"><Toggle checked={sys.sounds} onChange={(v) => patch('system', { sounds: v })} /></Field>
+            <Field label="Sons (compte à rebours, déclencheur, fin)"><Toggle checked={sys.sounds} onChange={(v) => patch('system', { sounds: v })} /></Field>
+            <Field label="Voix guide" hint={Object.entries(voiceFiles).map(([l, c]) => `${l.toUpperCase()} : ${c.found}/${c.total} fichiers`).join('  ·  ') || 'Vérification des fichiers…'}>
+              <Toggle checked={sys.voice} onChange={(v) => patch('system', { voice: v })} />
+            </Field>
+            <Field label="Volume de la voix (%)">
+              <div className="inline">
+                <NumberStepper value={Math.round(sys.voiceVolume * 100)} min={10} max={100} step={10} onChange={(v) => patch('system', { voiceVolume: v / 100 })} />
+                <button type="button" className="admin-btn" onClick={() => previewVoice(sys.lang, sys.voiceVolume)}>Écouter</button>
+              </div>
+            </Field>
             <Field label="Adresse publique de la galerie" hint="Vide = adresse locale de la borne (les téléphones doivent être sur le même Wi-Fi). Phase 2 : galerie en ligne.">
               <input value={sys.galleryBaseUrl} placeholder={status?.galleryOrigin} onChange={(e) => patch('system', { galleryBaseUrl: e.target.value.trim() })} />
             </Field>
