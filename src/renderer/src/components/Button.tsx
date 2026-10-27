@@ -1,6 +1,5 @@
 import { motion } from 'motion/react'
 import type { ReactNode } from 'react'
-import { play } from '@/lib/sound'
 
 interface Props {
   children: ReactNode
@@ -22,7 +21,6 @@ export function Button({ children, onClick, variant = 'primary', size = 'lg', di
       transition={{ type: 'spring', stiffness: 500, damping: 30 }}
       onClick={() => {
         if (disabled) return
-        play('tap')
         onClick?.()
       }}
     >
@@ -39,7 +37,6 @@ export function BackButton({ onClick, label }: { onClick: () => void; label: str
       className="back-button"
       aria-label={label}
       onClick={() => {
-        play('tap')
         onClick()
       }}
     >

@@ -1,4 +1,3 @@
-import { play } from '@/lib/sound'
 import { IconDelete } from './Icons'
 
 const ROWS = [
@@ -12,7 +11,6 @@ const DOMAINS = ['@gmail.com', '@hotmail.fr', '@outlook.fr', '@yahoo.fr', '@iclo
 /** Clavier AZERTY pour la saisie d'e-mail, touches de 96 px. */
 export function EmailKeyboard({ value, onChange }: { value: string; onChange: (v: string) => void }) {
   const press = (k: string): void => {
-    play('tap')
     if (k === 'del') onChange(value.slice(0, -1))
     else if (value.length < 80) onChange(value + k)
   }

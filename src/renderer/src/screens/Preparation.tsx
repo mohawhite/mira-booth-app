@@ -2,7 +2,6 @@ import { BackButton, Button } from '@/components/Button'
 import { LiveView } from '@/components/LiveView'
 import { Screen } from '@/components/Screen'
 import { useT } from '@/i18n'
-import { play } from '@/lib/sound'
 import type { ScreenProps } from './types'
 
 export function Preparation({ ctx, send }: ScreenProps) {
@@ -24,7 +23,6 @@ export function Preparation({ ctx, send }: ScreenProps) {
               type="button"
               className={ctx.colorMode === m ? 'active' : ''}
               onClick={() => {
-                play('tap')
                 send({ type: 'SET_COLOR', mode: m })
               }}
             >

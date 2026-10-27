@@ -6,7 +6,6 @@ import { Screen } from '@/components/Screen'
 import { useT } from '@/i18n'
 import { bridge } from '@/lib/bridge'
 import { useConfig } from '@/lib/config'
-import { play } from '@/lib/sound'
 import type { ScreenProps } from './types'
 
 export function Livraison({ ctx, send }: ScreenProps) {
@@ -17,7 +16,6 @@ export function Livraison({ ctx, send }: ScreenProps) {
   if (!saved) return null
 
   const setCopies = (n: number): void => {
-    play('tap')
     send({ type: 'SET_COPIES', copies: Math.max(0, Math.min(maxCopies, n)) })
   }
 

@@ -5,7 +5,6 @@ import { EmailKeyboard } from '@/components/Keyboard'
 import { Screen } from '@/components/Screen'
 import { useT } from '@/i18n'
 import { bridge } from '@/lib/bridge'
-import { play } from '@/lib/sound'
 import type { ScreenProps } from './types'
 
 export const isEmail = (v: string): boolean => /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(v)
@@ -22,7 +21,6 @@ export function Email({ ctx, send }: ScreenProps) {
     setBusy(true)
     try {
       await bridge.sendEmail({ eventId: ctx.saved.meta.eventId, sessionId: ctx.saved.meta.id, email: value })
-      play('success')
       send({ type: 'EMAIL_SENT', email: value })
     } finally {
       setBusy(false)
@@ -42,7 +40,6 @@ export function Email({ ctx, send }: ScreenProps) {
           type="button"
           className={`checkbox ${consent ? 'checked' : ''}`}
           onClick={() => {
-            play('tap')
             setConsent((c) => !c)
           }}
         >

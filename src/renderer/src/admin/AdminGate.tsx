@@ -2,7 +2,6 @@ import { AnimatePresence, motion } from 'motion/react'
 import { useRef, useState } from 'react'
 import { IconDelete } from '@/components/Icons'
 import { useConfig } from '@/lib/config'
-import { play } from '@/lib/sound'
 
 const HOLD_MS = 3000
 
@@ -21,7 +20,6 @@ export function AdminCorner({ enabled, onUnlock }: { enabled: boolean; onUnlock:
 
   const press = (k: string): void => {
     if (pin === null) return
-    play('tap')
     setError(false)
     if (k === 'del') return setPin(pin.slice(0, -1))
     const next = pin + k

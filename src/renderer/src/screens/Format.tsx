@@ -4,7 +4,6 @@ import { FormatGlyph } from '@/components/Icons'
 import { Screen } from '@/components/Screen'
 import { useT } from '@/i18n'
 import { useConfig } from '@/lib/config'
-import { play } from '@/lib/sound'
 import type { ScreenProps } from './types'
 
 export function Format({ send }: ScreenProps) {
@@ -25,7 +24,6 @@ export function Format({ send }: ScreenProps) {
             transition={{ delay: 0.08 * i, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             whileTap={{ scale: 0.97 }}
             onClick={() => {
-              play('tap')
               send({ type: 'CHOOSE_FORMAT', format: f })
             }}
           >
