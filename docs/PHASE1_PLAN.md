@@ -1,7 +1,13 @@
-# MIRA BOOTH APP — Phase 1 : plan à valider
+# MIRA BOOTH APP — Phase 1 : plan
 
 > Étape 11.1 du prompt : arborescence, machine à états, écrans, design tokens.
-> Rien n'est codé tant que ce plan n'est pas validé.
+>
+> **Validé** : thème **noir & blanc**, formats et réglages laissés à notre choix.
+> Écarts par rapport à ce plan dans le prototype, pour rester simple à installer sur la borne :
+> un seul paquet (pas de monorepo), CSS + design tokens (pas de Tailwind), stockage en fichiers
+> JSON (SQLite en Phase 2), rendu des planches au canvas (pas de module natif `sharp`).
+> La structure réelle est décrite dans le README. Les couleurs ci-dessous (§4) sont remplacées
+> par la palette noire et blanche de `src/renderer/src/styles/tokens.css`.
 
 Cible : écran tactile 15,6" **paysage 1920×1080**, objectif **au-dessus de l'écran**, Windows, i5 / 8 Go.
 Règle absolue : **aucune IA**.

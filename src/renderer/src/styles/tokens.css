@@ -1,0 +1,54 @@
+/* MIRA — design tokens. Thème noir & blanc, pensé pour un écran 15,6" en 1920×1080. */
+:root {
+  /* Couleurs */
+  --ink: #0a0a0a;
+  --surface: #141414;
+  --surface-2: #1e1e1e;
+  --white: #fafafa;
+  --muted: rgba(250, 250, 250, 0.62);
+  --faint: rgba(250, 250, 250, 0.34);
+  --line: rgba(250, 250, 250, 0.14);
+  --line-strong: rgba(250, 250, 250, 0.32);
+  --glass: rgba(20, 20, 20, 0.55);
+  --danger: #e5e5e5; /* les erreurs restent monochromes, signalées par l'icône et le texte */
+
+  /* Typographie */
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-ui: 'Manrope', system-ui, sans-serif;
+  --text-sm: 20px;
+  --text-body: 24px;
+  --text-lg: 32px;
+  --text-h3: 44px;
+  --text-h2: 64px;
+  --text-h1: 96px;
+  --text-count: 260px;
+  --tracking-wide: 0.32em;
+
+  /* Espacements (base 8) */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-6: 48px;
+  --space-8: 64px;
+  --space-12: 96px;
+
+  /* Formes */
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 32px;
+  --radius-pill: 999px;
+  --blur-glass: 24px;
+  --shadow-soft: 0 32px 80px rgba(0, 0, 0, 0.55);
+  --glow: 0 0 40px rgba(250, 250, 250, 0.35);
+
+  /* Tactile */
+  --touch-min: 80px;
+  --button-h: 120px;
+
+  /* Animations */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 250ms;
+  --dur-base: 350ms;
+  --dur-slow: 450ms;
+}

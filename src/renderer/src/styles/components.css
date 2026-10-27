@@ -1,0 +1,405 @@
+/* ---------- Scène 1920×1080 ---------- */
+.stage-viewport {
+  position: fixed;
+  inset: 0;
+  background: #000;
+}
+.stage {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1920px;
+  height: 1080px;
+  transform-origin: center;
+  overflow: hidden;
+  background:
+    radial-gradient(1200px 700px at 50% -10%, rgba(255, 255, 255, 0.07), transparent 60%),
+    var(--ink);
+}
+.screen-slot,
+.screen {
+  position: absolute;
+  inset: 0;
+}
+.screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8);
+}
+.screen-title {
+  font-size: var(--text-h2);
+  margin: 0 0 var(--space-6);
+  text-align: center;
+}
+.faint {
+  color: var(--faint);
+}
+
+/* ---------- Boutons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-width: 420px;
+  border-radius: var(--radius-pill);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition:
+    background var(--dur-fast) var(--ease-out-expo),
+    color var(--dur-fast) var(--ease-out-expo),
+    opacity var(--dur-fast);
+}
+.btn-lg {
+  height: var(--button-h);
+  padding: 0 var(--space-8);
+  font-size: 28px;
+}
+.btn-md {
+  height: 96px;
+  min-width: 340px;
+  padding: 0 var(--space-6);
+  font-size: 22px;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+.btn-primary {
+  background: var(--white);
+  color: var(--ink);
+  box-shadow: 0 0 0 1px var(--white), 0 18px 48px rgba(255, 255, 255, 0.12);
+}
+.btn-secondary {
+  border: 1px solid var(--line-strong);
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.03);
+}
+.btn-ghost {
+  color: var(--muted);
+}
+.btn:disabled {
+  opacity: 0.32;
+  cursor: default;
+}
+
+.back-button {
+  position: absolute;
+  top: var(--space-6);
+  left: var(--space-6);
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  color: var(--white);
+  z-index: 5;
+}
+
+/* ---------- Halo ---------- */
+.halo {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+.halo-ring,
+.halo-core {
+  position: absolute;
+  border-radius: 50%;
+}
+.halo-ring {
+  inset: 0;
+  border: 1.5px solid rgba(250, 250, 250, 0.75);
+  box-shadow: var(--glow), inset 0 0 30px rgba(250, 250, 250, 0.15);
+  animation: breathe 4.2s ease-in-out infinite;
+}
+.halo-ring-2 {
+  inset: 18%;
+  border-color: rgba(250, 250, 250, 0.3);
+  box-shadow: none;
+  animation-delay: -2.1s;
+}
+.halo-core {
+  inset: 42%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0) 70%);
+  animation: breathe 4.2s ease-in-out infinite reverse;
+}
+.halo-intense .halo-ring {
+  animation-duration: 1.6s;
+  box-shadow: 0 0 60px rgba(250, 250, 250, 0.6), inset 0 0 30px rgba(250, 250, 250, 0.3);
+}
+@keyframes breathe {
+  0%,
+  100% {
+    transform: scale(0.92);
+    opacity: 0.65;
+  }
+  50% {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+}
+
+/* ---------- Live view ---------- */
+.liveview {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: #000;
+  box-shadow: var(--shadow-soft), 0 0 0 1px var(--line);
+}
+.liveview video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity var(--dur-slow);
+}
+.liveview-frame span {
+  position: absolute;
+  width: 56px;
+  height: 56px;
+  border-color: rgba(255, 255, 255, 0.85);
+  border-style: solid;
+  border-width: 0;
+}
+.liveview-frame span:nth-child(1) { top: 24px; left: 24px; border-top-width: 2px; border-left-width: 2px; }
+.liveview-frame span:nth-child(2) { top: 24px; right: 24px; border-top-width: 2px; border-right-width: 2px; }
+.liveview-frame span:nth-child(3) { bottom: 24px; left: 24px; border-bottom-width: 2px; border-left-width: 2px; }
+.liveview-frame span:nth-child(4) { bottom: 24px; right: 24px; border-bottom-width: 2px; border-right-width: 2px; }
+
+/* ---------- Compte à rebours ---------- */
+.countdown {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+.countdown svg {
+  position: absolute;
+  inset: 0;
+}
+.countdown::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  background: rgba(10, 10, 10, 0.35);
+  backdrop-filter: blur(6px);
+}
+.countdown-value {
+  position: relative;
+  font-size: 220px;
+  line-height: 1;
+  text-shadow: 0 0 40px rgba(255, 255, 255, 0.45);
+}
+
+/* ---------- Cartes, QR, segmented ---------- */
+.card {
+  background: var(--glass);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(var(--blur-glass));
+  box-shadow: var(--shadow-soft);
+}
+.qr {
+  padding: 20px;
+  background: var(--white);
+  border-radius: var(--radius-md);
+  box-sizing: content-box;
+}
+.qr svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.segmented,
+.lang-switch {
+  display: inline-flex;
+  padding: 6px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+}
+.segmented button,
+.lang-switch button {
+  height: 80px;
+  padding: 0 var(--space-4);
+  border-radius: var(--radius-pill);
+  color: var(--muted);
+  font-size: 22px;
+  letter-spacing: 0.08em;
+  transition: all var(--dur-fast) var(--ease-out-expo);
+}
+.segmented button.active,
+.lang-switch button.active {
+  background: var(--white);
+  color: var(--ink);
+}
+
+/* ---------- Clavier virtuel ---------- */
+.keyboard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+.keyboard-row,
+.keyboard-domains {
+  display: flex;
+  gap: 12px;
+}
+.keyboard-domains {
+  margin-bottom: 8px;
+}
+.key {
+  width: 96px;
+  height: 88px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  font-size: 30px;
+  display: grid;
+  place-items: center;
+}
+.key:active {
+  background: var(--white);
+  color: var(--ink);
+}
+.key-domain {
+  width: auto;
+  padding: 0 var(--space-3);
+  font-size: 22px;
+  height: 72px;
+}
+.key-wide {
+  width: 320px;
+}
+.key-del {
+  width: 96px;
+}
+.key:disabled {
+  opacity: 0.3;
+}
+
+/* ---------- Inactivité ---------- */
+.idle-overlay,
+.pin-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  background: rgba(5, 5, 5, 0.72);
+  backdrop-filter: blur(14px);
+}
+.idle-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  text-align: center;
+}
+.idle-card h2 {
+  font-size: var(--text-h2);
+  margin: 0;
+}
+.idle-count {
+  font-size: 140px;
+}
+
+/* ---------- Flash ---------- */
+.flash {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  z-index: 30;
+  pointer-events: none;
+}
+
+/* ---------- Aperçu des tirages ---------- */
+.print-preview {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 4px;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+.print-preview-strip {
+  width: auto;
+}
+.revue-preview .print-preview-strip {
+  height: 900px;
+}
+.livraison-preview .print-preview-strip {
+  height: 640px;
+}
+
+/* ---------- PIN ---------- */
+.admin-corner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 140px;
+  height: 140px;
+  z-index: 35;
+}
+.pin-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+.pin-dots {
+  display: flex;
+  gap: 20px;
+}
+.pin-dots span {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1.5px solid var(--white);
+}
+.pin-dots span.filled {
+  background: var(--white);
+}
+.pin-dots.error {
+  animation: shake 0.4s;
+}
+@keyframes shake {
+  25% { transform: translateX(-12px); }
+  75% { transform: translateX(12px); }
+}
+.pin-pad {
+  display: grid;
+  grid-template-columns: repeat(3, 120px);
+  gap: 16px;
+}
+.pin-key {
+  height: 120px;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  font-size: 40px;
+  display: grid;
+  place-items: center;
+}
+.pin-key:active {
+  background: var(--white);
+  color: var(--ink);
+}
+.pin-cancel {
+  font-size: 18px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-color: transparent;
+  color: var(--muted);
+}
+
+.brand-mark {
+  position: absolute;
+  bottom: var(--space-4);
+  right: var(--space-6);
+  font-family: var(--font-display);
+  font-size: 20px;
+  letter-spacing: 0.4em;
+  color: var(--faint);
+}

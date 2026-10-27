@@ -1,0 +1,15 @@
+appId: app.mira.booth
+productName: MIRA BOOTH
+directories:
+  buildResources: build
+  output: dist
+files:
+  - out/**
+  - package.json
+win:
+  target: nsis
+  artifactName: MIRA-BOOTH-Setup-${version}.${ext}
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
