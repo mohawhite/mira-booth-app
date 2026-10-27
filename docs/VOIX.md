@@ -5,7 +5,7 @@ Une voix féminine accompagne l'invité aux moments clés (10 phrases courtes). 
 
 ## 1. Choisir la voix
 
-> **Fichiers en place :** `src/renderer/public/voix/fr/` contient la version « Alice » (10 fichiers,
+> **Fichiers en place :** `src/renderer/public/voix/fr/` et `voix/en/` contiennent la version « Alice » (10 fichiers chacun,
 > volume égalisé à environ -16 LUFS). Les régénérer avec le script les remplace (`FORCE=1`).
 
 **Voix retenue : Victoria – Warm and calm** (accent parisien), ID `WeAAwKYcS06VmXw086yZ`,
