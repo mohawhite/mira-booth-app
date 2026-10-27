@@ -106,3 +106,11 @@ src/
 - Pilote DNP dédié : état papier/ruban, compteur de tirages restants.
 - Galerie en ligne, envoi réel des e-mails, synchronisation hors ligne.
 - Éditeur de modèles, GIF/Boomerang, mises à jour automatiques.
+
+## Captures
+
+| | |
+|---|---|
+| ![Attente](docs/captures/01-attente.png) | ![Accueil](docs/captures/02-accueil.png) |
+| ![Format](docs/captures/03-format.png) | ![Compte à rebours](docs/captures/05-compte.png) |
+| ![Livraison](docs/captures/08-livraison.png) | ![Opérateur](docs/captures/15-admin.png) |
