@@ -13,7 +13,6 @@ export function AdminCorner({ enabled, onUnlock }: { enabled: boolean; onUnlock:
   const expected = useConfig((s) => s.config.system.pin)
 
   const start = (): void => {
-    if (!enabled) return
     timer.current = window.setTimeout(() => setPin(''), HOLD_MS)
   }
   const cancel = (): void => window.clearTimeout(timer.current)
@@ -35,7 +34,8 @@ export function AdminCorner({ enabled, onUnlock }: { enabled: boolean; onUnlock:
 
   return (
     <>
-      <div className="admin-corner" onPointerDown={start} onPointerUp={cancel} onPointerLeave={cancel} />
+      {/* Uniquement sur les écrans sans bouton Retour : ailleurs, la zone le recouvrirait. */}
+      {enabled && <div className="admin-corner" onPointerDown={start} onPointerUp={cancel} onPointerLeave={cancel} />}
       <AnimatePresence>
         {pin !== null && (
           <motion.div className="pin-overlay" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>

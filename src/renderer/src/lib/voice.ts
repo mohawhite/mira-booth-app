@@ -1,6 +1,5 @@
 // Voix guide de la borne (fichiers MP3 générés avec ElevenLabs, voir docs/VOIX.md).
 // Les fichiers vivent dans public/voix/<langue>/ ; s'il en manque, la borne reste simplement muette.
-import { useLang } from '@/i18n'
 import type { Lang } from '@shared/types'
 import { getConfig } from './config'
 
@@ -44,7 +43,7 @@ export function say(cue: VoiceCue, delayMs = 0): void {
   if (!voice) return
   stopVoice()
   const play = (): void => {
-    const audio = new Audio(fileUrl(useLang.getState().lang, pick(cue)))
+    const audio = new Audio(fileUrl(getConfig().system.lang, pick(cue)))
     audio.volume = voiceVolume
     current = audio
     audio.play().catch(() => {

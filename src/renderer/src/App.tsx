@@ -6,7 +6,6 @@ import { Admin } from './admin/Admin'
 import { AdminCorner } from './admin/AdminGate'
 import { IdleGuard } from './components/IdleGuard'
 import { Stage } from './components/Stage'
-import { useLang } from './i18n'
 import { bridge, isElectron } from './lib/bridge'
 import { getConfig, useConfig } from './lib/config'
 import { say, stopVoice } from './lib/voice'
@@ -60,11 +59,6 @@ function Booth() {
   const [admin, setAdmin] = useState(false)
   const state = snapshot.value as BoothState
   const ctx = snapshot.context
-
-  // Retour à la langue par défaut à chaque nouvelle séance.
-  useEffect(() => {
-    if (state === 'attente') useLang.getState().setLang(config.system.lang)
-  }, [state, config.system.lang])
 
   // Voix guide : une phrase à l'entrée de certains écrans.
   const previous = useRef<BoothState>(state)

@@ -65,7 +65,9 @@ export const boothMachine = setup({
     finalize: fromPromise<void, BoothContext>(async () => {})
   },
   guards: {
-    canRetake: ({ context }) => context.retakesLeft > 0
+    canRetake: ({ context }) => context.retakesLeft > 0,
+    // Un seul format activé dans l'espace opérateur : pas d'écran de choix.
+    singleFormat: () => getConfig().event.formats.length === 1
   }
 }).createMachine({
   id: 'booth',
@@ -80,7 +82,16 @@ export const boothMachine = setup({
       on: { START: 'accueil' }
     },
     accueil: {
-      on: { NEXT: 'format' }
+      on: {
+        NEXT: [
+          {
+            guard: 'singleFormat',
+            target: 'preparation',
+            actions: assign({ format: () => getConfig().event.formats[0] })
+          },
+          { target: 'format' }
+        ]
+      }
     },
     format: {
       on: {
@@ -91,7 +102,7 @@ export const boothMachine = setup({
     preparation: {
       entry: assign({ photos: [] }),
       on: {
-        BACK: 'format',
+        BACK: [{ guard: 'singleFormat', target: 'accueil' }, { target: 'format' }],
         SET_COLOR: { actions: assign({ colorMode: ({ event }) => event.mode }) },
         READY: 'compte'
       }

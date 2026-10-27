@@ -213,16 +213,14 @@
   height: 100%;
   display: block;
 }
-.segmented,
-.lang-switch {
+.segmented {
   display: inline-flex;
   padding: 6px;
   border-radius: var(--radius-pill);
   border: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.03);
 }
-.segmented button,
-.lang-switch button {
+.segmented button {
   height: 80px;
   padding: 0 var(--space-4);
   border-radius: var(--radius-pill);
@@ -231,8 +229,7 @@
   letter-spacing: 0.08em;
   transition: all var(--dur-fast) var(--ease-out-expo);
 }
-.segmented button.active,
-.lang-switch button.active {
+.segmented button.active {
   background: var(--white);
   color: var(--ink);
 }

@@ -298,7 +298,7 @@ export function Admin({ onClose }: { onClose: () => void }) {
             <Field label="Code PIN opérateur" hint="4 à 8 chiffres.">
               <input inputMode="numeric" value={sys.pin} onChange={(e) => patch('system', { pin: e.target.value.replace(/\D/g, '').slice(0, 8) })} />
             </Field>
-            <Field label="Langue par défaut"><Choice value={sys.lang} options={[['fr', 'Français'], ['en', 'English']]} onChange={(v) => patch('system', { lang: v })} /></Field>
+            <Field label="Langue de la borne" hint="Les invités ne peuvent pas la changer."><Choice value={sys.lang} options={[['fr', 'Français'], ['en', 'English']]} onChange={(v) => patch('system', { lang: v })} /></Field>
             <Field label="Sons (compte à rebours, déclencheur, fin)"><Toggle checked={sys.sounds} onChange={(v) => patch('system', { sounds: v })} /></Field>
             <Field label="Voix guide" hint={Object.entries(voiceFiles).map(([l, c]) => `${l.toUpperCase()} : ${c.found}/${c.total} fichiers`).join('  ·  ') || 'Vérification des fichiers…'}>
               <Toggle checked={sys.voice} onChange={(v) => patch('system', { voice: v })} />
