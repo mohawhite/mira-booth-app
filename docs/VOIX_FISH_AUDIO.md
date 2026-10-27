@@ -5,7 +5,7 @@ Chaque bloc de texte ci-dessous = **un fichier audio**. Copiez-collez le texte d
 
 ## 1. Réglages (à faire une fois)
 
-- **Modèle :** S2 Pro (le plus récent ; il comprend les indications entre crochets `[ ]`).
+- **Modèle :** S2.1 Pro (le plus récent ; il comprend les indications entre crochets `[ ]`).
   Avec l'ancien modèle S1, remplacez les crochets par des parenthèses : `(calm)`, `(soft tone)`.
 - **Voix :** une voix **féminine française**, **posée, chaleureuse, élégante** — ton d'hôtesse
   d'un bel hôtel, pas d'animatrice radio. Gardez **la même voix pour tous les fichiers**.
@@ -170,5 +170,5 @@ votre offre).
 
 Les fichiers arrivent dans `src/renderer/public/voix/fr/`. Les textes sont dans
 `scripts/voix-phrases.json` (modifiables). Pour régénérer : `$env:FORCE="1"`.
-Si l'API renvoie une erreur de modèle, essayez `$env:FISH_MODEL="s1"`.
+Modèle utilisé : `s2.1-pro` (le modèle `s1` est retiré fin 2026).
 Ne mettez jamais votre clé API dans un fichier du dépôt.

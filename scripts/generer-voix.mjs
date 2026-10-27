@@ -7,7 +7,7 @@
 //     FISH_API_KEY=votre_cle FISH_VOICE_ID=id_de_la_voix node scripts/generer-voix.mjs
 //
 // Options :
-//   FISH_MODEL   modèle Fish Audio (défaut : s2-pro ; essayez « s1 » en cas d'erreur)
+//   FISH_MODEL   modèle Fish Audio (défaut : s2.1-pro, le plus récent)
 //   LANGS        langues à générer, séparées par des virgules (défaut : fr)
 //   FORCE=1      régénère les fichiers déjà présents
 //
@@ -21,7 +21,7 @@ const phrases = JSON.parse(readFileSync(join(root, 'scripts/voix-phrases.json'),
 
 const apiKey = process.env.FISH_API_KEY
 const voiceId = process.env.FISH_VOICE_ID
-const model = process.env.FISH_MODEL || 's2-pro'
+const model = process.env.FISH_MODEL || 's2.1-pro'
 const langs = (process.env.LANGS || 'fr').split(',').map((l) => l.trim())
 const force = process.env.FORCE === '1'
 
