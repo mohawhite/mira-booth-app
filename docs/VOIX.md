@@ -5,6 +5,9 @@ Une voix féminine accompagne l'invité aux moments clés (10 phrases courtes). 
 
 ## 1. Choisir la voix
 
+> **Fichiers en place :** `src/renderer/public/voix/fr/` contient la version « Alice » (10 fichiers,
+> volume égalisé à environ -16 LUFS). Les régénérer avec le script les remplace (`FORCE=1`).
+
 **Voix retenue : Victoria – Warm and calm** (accent parisien), ID `WeAAwKYcS06VmXw086yZ`,
 utilisée par défaut par le script. Pour en changer : `$env:ELEVENLABS_VOICE_ID="autre_id"`.
 
