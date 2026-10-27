@@ -1,17 +1,18 @@
-// Génère les fichiers de la voix MIRA avec l'API Fish Audio.
+// Génère les fichiers de la voix MIRA avec l'API ElevenLabs.
 // À lancer sur votre PC (Node.js 22), avec votre propre clé API :
 //
 //   Windows (PowerShell) :
-//     $env:FISH_API_KEY="votre_cle"; $env:FISH_VOICE_ID="id_de_la_voix"; node scripts/generer-voix.mjs
+//     $env:ELEVENLABS_API_KEY="votre_cle"; $env:ELEVENLABS_VOICE_ID="id_de_la_voix"; npm run voix
 //   macOS / Linux :
-//     FISH_API_KEY=votre_cle FISH_VOICE_ID=id_de_la_voix node scripts/generer-voix.mjs
+//     ELEVENLABS_API_KEY=votre_cle ELEVENLABS_VOICE_ID=id_de_la_voix npm run voix
 //
 // Options :
-//   FISH_MODEL   modèle Fish Audio (défaut : s2.1-pro, le plus récent)
-//   LANGS        langues à générer, séparées par des virgules (défaut : fr)
-//   FORCE=1      régénère les fichiers déjà présents
+//   ELEVENLABS_MODEL  modèle (défaut : eleven_multilingual_v2, très bon en français)
+//   LANGS             langues à générer, séparées par des virgules (défaut : fr)
+//   FORCE=1           régénère les fichiers déjà présents
 //
-// Les fichiers sont écrits dans src/renderer/public/voix/<langue>/<nom>.mp3.
+// Les textes sont dans scripts/voix-phrases.json ; les fichiers sont écrits dans
+// src/renderer/public/voix/<langue>/<nom>.mp3.
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -19,26 +20,28 @@ import { fileURLToPath } from 'node:url'
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const phrases = JSON.parse(readFileSync(join(root, 'scripts/voix-phrases.json'), 'utf8'))
 
-const apiKey = process.env.FISH_API_KEY
-const voiceId = process.env.FISH_VOICE_ID
-const model = process.env.FISH_MODEL || 's2.1-pro'
+const apiKey = process.env.ELEVENLABS_API_KEY
+const voiceId = process.env.ELEVENLABS_VOICE_ID
+const model = process.env.ELEVENLABS_MODEL || 'eleven_multilingual_v2'
 const langs = (process.env.LANGS || 'fr').split(',').map((l) => l.trim())
 const force = process.env.FORCE === '1'
 
 if (!apiKey || !voiceId) {
-  console.error('Il manque FISH_API_KEY et/ou FISH_VOICE_ID (voir l’en-tête de ce fichier).')
+  console.error('Il manque ELEVENLABS_API_KEY et/ou ELEVENLABS_VOICE_ID (voir l’en-tête de ce fichier).')
   process.exit(1)
 }
 
 async function tts(text) {
-  const res = await fetch('https://api.fish.audio/v1/tts', {
+  const url = `https://api.elevenlabs.io/v1/text-to-speech/${encodeURIComponent(voiceId)}?output_format=mp3_44100_128`
+  const res = await fetch(url, {
     method: 'POST',
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      'Content-Type': 'application/json',
-      model
-    },
-    body: JSON.stringify({ text, reference_id: voiceId, format: 'mp3', normalize: true })
+    headers: { 'xi-api-key': apiKey, 'Content-Type': 'application/json', Accept: 'audio/mpeg' },
+    body: JSON.stringify({
+      text,
+      model_id: model,
+      // Voix posée et régulière : stabilité assez haute, peu d'exagération.
+      voice_settings: { stability: 0.6, similarity_boost: 0.8, style: 0.15, use_speaker_boost: true }
+    })
   })
   if (!res.ok) throw new Error(`HTTP ${res.status} : ${(await res.text()).slice(0, 300)}`)
   return Buffer.from(await res.arrayBuffer())

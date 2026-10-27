@@ -1,26 +1,26 @@
 {
   "fr": {
-    "accueil-1": "[warm, soft voice] Bonsoir, et bienvenue. Choisissez votre format.",
-    "accueil-2": "[warm, smiling] Bienvenue ! Prêts pour une belle photo ? Choisissez votre format.",
-    "regard-1": "[calm, gentle] Regardez l'objectif… juste au-dessus de l'écran.",
-    "regard-2": "[calm, gentle] Les yeux vers l'objectif, en haut… et souriez.",
-    "pose-1": "[smiling] Magnifique. Changez de pose !",
-    "pose-2": "[playful, soft] Encore une… la plus belle.",
-    "pose-3": "[warm] Parfait. On continue !",
-    "revue": "[warm, soft voice] Et voici votre photo.",
-    "impression": "[warm, smiling] Merci ! Votre photo s'imprime, elle arrive dans quelques secondes.",
-    "merci": "[warm, smiling] Merci… et très belle soirée !"
+    "accueil-1": "Bonsoir, et bienvenue. Choisissez votre format.",
+    "accueil-2": "Bienvenue ! Prêts pour une belle photo ? Choisissez votre format.",
+    "regard-1": "Regardez l'objectif… juste au-dessus de l'écran.",
+    "regard-2": "Les yeux vers l'objectif, en haut… et souriez.",
+    "pose-1": "Magnifique. Changez de pose !",
+    "pose-2": "Encore une… la plus belle.",
+    "pose-3": "Parfait. On continue !",
+    "revue": "Et voici votre photo.",
+    "impression": "Merci ! Votre photo s'imprime, elle arrive dans quelques secondes.",
+    "merci": "Merci… et très belle soirée !"
   },
   "en": {
-    "accueil-1": "[warm, soft voice] Good evening, and welcome. Please choose your format.",
-    "accueil-2": "[warm, smiling] Welcome! Ready for a beautiful photo? Choose your format.",
-    "regard-1": "[calm, gentle] Look at the lens… just above the screen.",
-    "regard-2": "[calm, gentle] Eyes up to the lens… and smile.",
-    "pose-1": "[smiling] Beautiful. Strike a new pose!",
-    "pose-2": "[playful, soft] One more… the best one.",
-    "pose-3": "[warm] Perfect. Keep going!",
-    "revue": "[warm, soft voice] And here is your photo.",
-    "impression": "[warm, smiling] Thank you! Your photo is printing, it will be ready in a few seconds.",
-    "merci": "[warm, smiling] Thank you… and have a wonderful evening!"
+    "accueil-1": "Good evening, and welcome. Please choose your format.",
+    "accueil-2": "Welcome! Ready for a beautiful photo? Choose your format.",
+    "regard-1": "Look at the lens… just above the screen.",
+    "regard-2": "Eyes up to the lens… and smile.",
+    "pose-1": "Beautiful. Strike a new pose!",
+    "pose-2": "One more… the best one.",
+    "pose-3": "Perfect. Keep going!",
+    "revue": "And here is your photo.",
+    "impression": "Thank you! Your photo is printing, it will be ready in a few seconds.",
+    "merci": "Thank you… and have a wonderful evening!"
   }
 }
