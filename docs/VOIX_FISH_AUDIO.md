@@ -148,3 +148,27 @@ voix/
 ```
 
 Le décompte « 3, 2, 1 » reste aux tics sonores : pas besoin de le générer.
+
+---
+
+## 5. Option automatique : générer tous les fichiers avec l'API
+
+Au lieu de copier-coller chaque phrase, le script `scripts/generer-voix.mjs` génère tout
+d'un coup, sur votre PC, avec votre clé API Fish Audio (l'API est facturée à part, selon
+votre offre).
+
+1. Clé API : Fish Audio → **Developer** → **API Keys** → créer une clé.
+2. Identifiant de la voix : ouvrez la page de la voix (ex. Clémence) ; l'identifiant est la
+   longue suite de lettres et chiffres dans l'adresse de la page.
+3. Dans le dossier du projet (PowerShell) :
+   ```powershell
+   $env:FISH_API_KEY="votre_cle"
+   $env:FISH_VOICE_ID="identifiant_de_la_voix"
+   npm run voix
+   ```
+   Pour l'anglais aussi : `$env:LANGS="fr,en"` avant `npm run voix`.
+
+Les fichiers arrivent dans `src/renderer/public/voix/fr/`. Les textes sont dans
+`scripts/voix-phrases.json` (modifiables). Pour régénérer : `$env:FORCE="1"`.
+Si l'API renvoie une erreur de modèle, essayez `$env:FISH_MODEL="s1"`.
+Ne mettez jamais votre clé API dans un fichier du dépôt.

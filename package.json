@@ -13,7 +13,8 @@
     "start": "electron-vite preview",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "test": "vitest run",
-    "dist:win": "electron-vite build && electron-builder --win"
+    "dist:win": "electron-vite build && electron-builder --win",
+    "voix": "node scripts/generer-voix.mjs"
   },
   "dependencies": {
     "@fontsource/cormorant-garamond": "^5.3.0",
