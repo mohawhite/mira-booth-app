@@ -2,11 +2,12 @@
 // À lancer sur votre PC (Node.js 22), avec votre propre clé API :
 //
 //   Windows (PowerShell) :
-//     $env:ELEVENLABS_API_KEY="votre_cle"; $env:ELEVENLABS_VOICE_ID="id_de_la_voix"; npm run voix
+//     $env:ELEVENLABS_API_KEY="votre_cle"; npm run voix
 //   macOS / Linux :
-//     ELEVENLABS_API_KEY=votre_cle ELEVENLABS_VOICE_ID=id_de_la_voix npm run voix
+//     ELEVENLABS_API_KEY=votre_cle npm run voix
 //
 // Options :
+//   ELEVENLABS_VOICE_ID  autre voix (défaut : Victoria)
 //   ELEVENLABS_MODEL  modèle (défaut : eleven_multilingual_v2, très bon en français)
 //   LANGS             langues à générer, séparées par des virgules (défaut : fr)
 //   FORCE=1           régénère les fichiers déjà présents
@@ -21,13 +22,14 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const phrases = JSON.parse(readFileSync(join(root, 'scripts/voix-phrases.json'), 'utf8'))
 
 const apiKey = process.env.ELEVENLABS_API_KEY
-const voiceId = process.env.ELEVENLABS_VOICE_ID
+// Voix par défaut : Victoria – Warm and calm (française, accent parisien).
+const voiceId = process.env.ELEVENLABS_VOICE_ID || 'WeAAwKYcS06VmXw086yZ'
 const model = process.env.ELEVENLABS_MODEL || 'eleven_multilingual_v2'
 const langs = (process.env.LANGS || 'fr').split(',').map((l) => l.trim())
 const force = process.env.FORCE === '1'
 
-if (!apiKey || !voiceId) {
-  console.error('Il manque ELEVENLABS_API_KEY et/ou ELEVENLABS_VOICE_ID (voir l’en-tête de ce fichier).')
+if (!apiKey) {
+  console.error('Il manque ELEVENLABS_API_KEY (voir l’en-tête de ce fichier).')
   process.exit(1)
 }
 

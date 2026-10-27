@@ -5,6 +5,9 @@ Une voix féminine accompagne l'invité aux moments clés (10 phrases courtes). 
 
 ## 1. Choisir la voix
 
+**Voix retenue : Victoria – Warm and calm** (accent parisien), ID `WeAAwKYcS06VmXw086yZ`,
+utilisée par défaut par le script. Pour en changer : `$env:ELEVENLABS_VOICE_ID="autre_id"`.
+
 - ElevenLabs → **Voix** → **Bibliothèque** : filtrer **Français**, **Féminin**.
 - Ton recherché : **posé, chaleureux, élégant** (hôtesse d'un bel hôtel, pas animatrice radio).
 - Écouter avec la phrase : « Bonsoir, et bienvenue. Choisissez votre format. »
@@ -29,7 +32,6 @@ Dans le dossier du projet (PowerShell) :
 ```powershell
 git pull
 $env:ELEVENLABS_API_KEY="votre_cle"
-$env:ELEVENLABS_VOICE_ID="id_de_la_voix"
 npm run voix
 ```
 
